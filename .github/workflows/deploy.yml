@@ -11,14 +11,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
-
-    - name: Install Dependencies
-      run: npm install
+        node-version: '23'
 
     - name: Update index.html with icon list
       run: node update-index.js
@@ -35,4 +34,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
+        publish_dir: .
