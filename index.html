@@ -18,12 +18,22 @@
         <input type="text" id="searchInput" placeholder="Поиск иконок..." onkeyup="searchIcons()">
     </div>
     <div class="gallery" id="gallery">
-        <img src="icons/diamond.png" alt="Diamond" data-name="diamond">
-        <img src="icons/emerald.png" alt="Sword" data-name="sword">
-        <img src="icons/gold.png" alt="Pickaxe" data-name="pickaxe">
+        <!-- Иконки будут добавлены через JS -->
     </div>
 
     <script>
+        const iconList = [];
+
+        const gallery = document.getElementById('gallery');
+
+        iconList.forEach(icon => {
+            const img = document.createElement('img');
+            img.src = `icons/${icon}`;
+            img.alt = icon.replace('.png', '');
+            img.setAttribute('data-name', icon.replace('.png', ''));
+            gallery.appendChild(img);
+        });
+
         function searchIcons() {
             const input = document.getElementById('searchInput').value.toLowerCase();
             const images = document.querySelectorAll('.gallery img');
@@ -37,16 +47,6 @@
                 }
             });
         }
-
-        const iconList = ['diamond.png', 'emerald.png', 'gold.png'];
-        const gallery = document.getElementById('gallery');
-        iconList.forEach(icon => {
-            const img = document.createElement('img');
-            img.src = `icons/${icon}`;
-            img.alt = icon.replace('.png', '');
-            img.setAttribute('data-name', icon.replace('.png', ''));
-            gallery.appendChild(img);
-        });
     </script>
 </body>
 </html>
