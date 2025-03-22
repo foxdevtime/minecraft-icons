@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Иконки</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f0f0f0; }
+        .search-bar { text-align: center; margin-bottom: 20px; }
+        #searchInput { padding: 10px; width: 300px; font-size: 16px; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+        .gallery img { width: 100px; height: 100px; object-fit: contain; }
+        .gallery img.hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Поиск иконок..." onkeyup="searchIcons()">
+    </div>
+    <div class="gallery" id="gallery">
+        <!-- Иконки будут добавлены через JS -->
+    </div>
+
+    <script>
+        const iconList = [
+  "diamond.png",
+  "emerald.png",
+  "gold.png"
+];
+
+        const gallery = document.getElementById('gallery');
+
+        iconList.forEach(icon => {
+            const img = document.createElement('img');
+            img.src = `icons/${icon}`;
+            img.alt = icon.replace('.png', '');
+            img.setAttribute('data-name', icon.replace('.png', ''));
+            gallery.appendChild(img);
+        });
+
+        function searchIcons() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const images = document.querySelectorAll('.gallery img');
+
+            images.forEach(img => {
+                const name = img.getAttribute('data-name').toLowerCase();
+                if (name.includes(input)) {
+                    img.classList.remove('hidden');
+                } else {
+                    img.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
